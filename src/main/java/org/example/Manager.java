@@ -4,10 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+
 public class Manager extends JFrame {
     private JTextField nameField;
     private JTextField phoneField;
     private JButton addButton;
+    private JButton viewButton;
     private JList<String> contactList;
 
     private ArrayList<Contact> contacts;
@@ -18,6 +20,7 @@ public class Manager extends JFrame {
         setTitle("Contact Manager");
         setSize(500, 350);
         setLayout(new BorderLayout());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(2, 2));
@@ -31,42 +34,36 @@ public class Manager extends JFrame {
         addButton = new JButton("Add Contact");
         addButton.addActionListener(e -> addContact());
 
+        viewButton = new JButton("View Contacts");
+        viewButton.addActionListener(e -> viewContacts());
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(2, 1));
+        buttonPanel.add(addButton);
+        buttonPanel.add(viewButton);
 
         add(inputPanel, BorderLayout.NORTH);
-        add(addButton, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.CENTER);
 
         setVisible(true);
     }
 
     private void addContact() {
-        String name = nameField.getText();
-        String phone = phoneField.getText();
-        Contact contact = new Contact(name, phone);
-        contacts.add(contact);
-        nameField.setText("");
-        phoneField.setText("");
+        if(nameField.getText().isEmpty() || phoneField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "no words in lines");
+        }
+        else{
+            String name = nameField.getText();
+            String phone = phoneField.getText();
+            Contact contact = new Contact(name, phone);
+            contacts.add(contact);
+            nameField.setText("");
+            phoneField.setText("");
+        }
+
+    }
+    private void viewContacts() {
+
     }
 
-    private class Contact {
-        private String name;
-        private String phone;
-
-        public Contact(String name, String phone) {
-            this.name = name;
-            this.phone = phone;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getPhone() {
-            return phone;
-        }
-
-        @Override
-        public String toString() {
-            return name + ": " + phone;
-        }
-    }
 }
