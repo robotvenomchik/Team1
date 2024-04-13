@@ -3,9 +3,9 @@ package org.example;
 
 public class Contact {
     private String name;
-    private String phone;
+    private int phone;
 
-    public Contact(String name, String phone) {
+    public Contact(String name, int phone) {
         this.name = name;
         this.phone = phone;
     }
@@ -14,7 +14,7 @@ public class Contact {
         return name;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
