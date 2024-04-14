@@ -25,17 +25,22 @@ public class Manager extends JFrame {
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(2, 2));
         nameField = new JTextField();
+        nameField.setFont(new Font("Arial", Font.PLAIN, 25));
         phoneField = new JTextField();
+        phoneField.setFont(new Font("Arial", Font.PLAIN, 25));
         inputPanel.add(new JLabel("Name:"));
         inputPanel.add(nameField);
         inputPanel.add(new JLabel("Phone:"));
         inputPanel.add(phoneField);
 
         addButton = new JButton("Add Contact");
+        addButton.setFont(new Font("Arial", Font.PLAIN, 15));
         addButton.addActionListener(e -> addContact());
 
         viewButton = new JButton("View Contacts");
+        viewButton.setFont(new Font("Arial", Font.PLAIN, 15));
         viewButton.addActionListener(e -> viewContacts());
+
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(2, 1));
@@ -49,18 +54,23 @@ public class Manager extends JFrame {
     }
 
     private void addContact() {
-        if(nameField.getText().isEmpty() || phoneField.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "no words in lines");
+        if (nameField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "No words in line Name");
+        }
+        else if (phoneField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No number in line Phone");
+        }
+        else if (!phoneField.getText().matches("[0-9]+")){
+            JOptionPane.showMessageDialog(null, "Phone number cannot contain letters");
         }
         else{
             String name = nameField.getText();
-            String phone = phoneField.getText();
+            int phone = Integer.parseInt(phoneField.getText());
             Contact contact = new Contact(name, phone);
             contacts.add(contact);
             nameField.setText("");
             phoneField.setText("");
         }
-
     }
     private void viewContacts() {
 
