@@ -22,4 +22,12 @@ public class Contact {
     public String toString() {
         return name + ": " + phone;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
 }
