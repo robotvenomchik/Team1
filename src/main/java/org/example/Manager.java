@@ -94,9 +94,20 @@ public class Manager extends JFrame {
 
         JOptionPane.showMessageDialog(null, contactsPanel, "Contacts", JOptionPane.PLAIN_MESSAGE);
     }
-    public void redoContact(Contact contact){
+    private void redoContact(Contact contact) {
+        String newName = JOptionPane.showInputDialog(null, "Enter new name for contact:", "Edit Name", JOptionPane.QUESTION_MESSAGE);
+        String newPhone = JOptionPane.showInputDialog(null, "Enter new phone number for contact:", "Edit Phone", JOptionPane.QUESTION_MESSAGE);
+        int phone = Integer.parseInt(newPhone);
 
+        if (newName != null && newPhone != null) {
+            contact.setName(newName);
+            contact.setPhone(phone);
+            JOptionPane.showMessageDialog(null, "Contact has been edited successfully", "Edit Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Editing cancelled", "Edit Cancelled", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
+
     public void deleteContact(Contact contact){
 
     }
