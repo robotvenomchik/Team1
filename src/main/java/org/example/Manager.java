@@ -102,9 +102,9 @@ public class Manager extends JFrame {
         if (newName != null && newPhone != null) {
             contact.setName(newName);
             contact.setPhone(phone);
-            JOptionPane.showMessageDialog(null, "Contact has been edited successfully.", "Edit Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Contact has been edited successfully", "Edit Success", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Editing cancelled.", "Edit Cancelled", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Editing cancelled", "Edit Cancelled", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
