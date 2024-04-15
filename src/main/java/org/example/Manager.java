@@ -73,7 +73,33 @@ public class Manager extends JFrame {
         }
     }
     private void viewContacts() {
+        JButton[] buttons = new JButton[contacts.size()];
+
+        JPanel contactsPanel = new JPanel();
+        contactsPanel.setLayout(new GridLayout(contacts.size(), 3));
+
+        for (int i = 0; i < contacts.size(); i++) {
+            Contact contact = contacts.get(i);
+            JLabel contactLabel = new JLabel(contact.getName() + ": " + contact.getPhone());
+            JButton redoButton = new JButton("Redo");
+            JButton deleteButton = new JButton("Delete");
+
+            redoButton.addActionListener(e -> redoContact(contact));
+            deleteButton.addActionListener(e -> deleteContact(contact));
+
+            contactsPanel.add(contactLabel);
+            contactsPanel.add(redoButton);
+            contactsPanel.add(deleteButton);
+        }
+
+        JOptionPane.showMessageDialog(null, contactsPanel, "Contacts", JOptionPane.PLAIN_MESSAGE);
+    }
+    public void redoContact(Contact contact){
 
     }
+    public void deleteContact(Contact contact){
+
+    }
+
 
 }
