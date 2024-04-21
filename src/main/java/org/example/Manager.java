@@ -196,4 +196,15 @@ public class Manager extends JFrame {
             e.printStackTrace();
         }
     }
+
+    public JTextField getNameField() {
+        return nameField;
+    }
+
+    public JTextField getPhoneField() {
+        return phoneField;
+    }
+    public ArrayList<Contact> getContacts(){
+        return contacts;
+    }
 }

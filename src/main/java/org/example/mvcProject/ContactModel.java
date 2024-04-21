@@ -100,13 +100,11 @@ public class ContactModel {
         JOptionPane.getRootFrame().dispose();
         JOptionPane.getRootFrame().dispose();
         writeContactsToFile();
-        viewContacts();
     }
 
     public void deleteContact(Contact contact){
         contacts.remove(contact);
         writeContactsToFile();
-        viewContacts();
     }
 
     private ArrayList<Contact> readContactsFromFile() {

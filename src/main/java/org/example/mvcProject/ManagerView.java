@@ -1,21 +1,18 @@
 package org.example.mvcProject;
 
-import org.example.Contact;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
-public class Manager extends JFrame {
+public class ManagerView extends JFrame {
     private ContactModel contactModel;
     private ContactView contactView;
     private ContactController contactController;
 
 
-    public Manager() {
+    public ManagerView() {
         contactModel = new ContactModel();
+        contactView = new ContactView();
         contactController = new ContactController(contactModel, contactView);
-        contactView = new ContactView(contactController);
 
 
         setTitle("Contact Manager");
@@ -35,7 +32,12 @@ public class Manager extends JFrame {
 
         JButton addButton = new JButton("Add Contact");
         addButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        addButton.addActionListener(e -> contactController.addContact(nameField.getText(), phoneField.getText()));
+        addButton.addActionListener(e -> {
+            String name = nameField.getText();
+            String phone = phoneField.getText();
+            contactController.addContact(name, phone);
+            nameField.setText("");
+            phoneField.setText("");});
 
         JButton viewButton = new JButton("View Contacts");
         viewButton.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -53,6 +55,6 @@ public class Manager extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(Manager::new);
+        SwingUtilities.invokeLater(ManagerView::new);
     }
 }
