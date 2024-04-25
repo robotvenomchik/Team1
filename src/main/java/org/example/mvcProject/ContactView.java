@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ContactView extends JPanel {
+public class ContactView extends JFrame {
     private ContactController contactController;
     private JPanel contactsPanel = new JPanel();
 
@@ -17,44 +17,38 @@ public class ContactView extends JPanel {
     }
 
     public void updateContacts(ArrayList<Contact> contacts) {
-        contactsPanel.removeAll(); // Очищаємо попередні компоненти перед додаванням нових
-
-        contactsPanel.setLayout(new BoxLayout(contactsPanel, BoxLayout.Y_AXIS)); // Встановлюємо layout на BoxLayout з вертикальною орієнтацією
-
+        contactsPanel.removeAll();
+        contactsPanel.setLayout(new GridLayout(contacts.size(), 3));
         for (Contact contact : contacts) {
-            JPanel contactPanel = new JPanel(); // Створюємо нову панель для кожного контакту
-            contactPanel.setLayout(new BorderLayout()); // Встановлюємо layout на BorderLayout
-
             JLabel contactLabel = new JLabel(contact.getName() + ": " + contact.getPhone());
             JButton redoButton = new JButton("Redo");
             JButton deleteButton = new JButton("Delete");
 
-            redoButton.addActionListener(e -> contactController.redoContact1(contact));
-            deleteButton.addActionListener(e -> contactController.deleteContact1(contact));
+            redoButton.addActionListener(e -> contactController.redoContact(contact));
+            deleteButton.addActionListener(e -> contactController.deleteContact(contact));
 
-            JPanel buttonPanel = new JPanel(); // Панель для кнопок redo та delete
-            buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT)); // Встановлюємо layout на FlowLayout з праворучним вирівнюванням
-            buttonPanel.add(redoButton);
-            buttonPanel.add(deleteButton);
-
-            contactPanel.add(contactLabel, BorderLayout.CENTER); // Додаємо мітку контакту у центр панелі
-            contactPanel.add(buttonPanel, BorderLayout.EAST); // Додаємо панель з кнопками у правий край панелі
-
-            contactsPanel.add(contactPanel); // Додаємо панель контакту до загальної панелі контактів
+            contactsPanel.add(contactLabel);
+            contactsPanel.add(redoButton);
+            contactsPanel.add(deleteButton);
         }
-
-        revalidate(); // Перерендерити панель для відображення змін
+        revalidate();
         repaint();
     }
 
     public void displayContactsWindow() {
-        JOptionPane.showOptionDialog(null,
-                contactsPanel,
-                "Choose",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                new Object[] {},
-                null);    }
-}
+        JOptionPane.showOptionDialog(null, contactsPanel, "Contacts", JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE, null, new Object[]{}, null);
+    }
 
+    public void redoContact(Contact contact) {
+        String newName = JOptionPane.showInputDialog(null, "Enter new name for contact:", "Edit Name", JOptionPane.QUESTION_MESSAGE);
+        if (newName != null) {
+            contact.setName(newName);
+            contactController.viewContacts();
+        }
+    }
+
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
+}

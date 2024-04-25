@@ -1,60 +1,45 @@
 package org.example.mvcProject;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
-class ContactController {
-    private ContactModel contactModel;
+public class ContactController {
+    private ContactDAO contactDAO;
     private ContactView contactView;
 
-    public ContactController(ContactModel contactModel, ContactView contactView) {
-        this.contactModel = contactModel;
+    public ContactController(ContactDAO contactDAO, ContactView contactView) {
+        this.contactDAO = contactDAO;
         this.contactView = contactView;
         contactView.setContactController(this);
     }
 
     public void addContact(String name, String phone) {
+        // Validate input
         if (name.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No words in line Name");
+            contactView.showMessage("No name provided!");
             return;
         }
-        if (phone.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No number in line Phone");
+        if (phone.isEmpty() || !phone.matches("\\d+")) {
+            contactView.showMessage("Invalid phone number!");
             return;
         }
-        if (!phone.matches("[0-9]+")) {
-            JOptionPane.showMessageDialog(null, "Phone number cannot contain letters");
-            return;
-        }
-        Contact newContact = new Contact(name, Integer.parseInt(phone));
-        contactModel.addContact(newContact);
 
+        // Add contact
+        Contact newContact = new Contact(name, Integer.parseInt(phone));
+        contactDAO.addContact(newContact);
+        contactView.updateContacts(contactDAO.getAllContacts());
     }
 
     public void viewContacts() {
-        contactView.updateContacts(contactModel.getContacts()); // Оновлення відображення контактів
-        contactView.displayContactsWindow(); // Відображення вікна з контактами
-    }
-
-    public void redoContact1(Contact contact) {
-        contactModel.redoContact(contact);
-        contactView.updateContacts(contactModel.getContacts()); // Оновлення відображення після переробки контакту
-        contactView.displayContactsWindow(); // Перевідображення вікна з контактами
-    }
-
-    public void deleteContact1(Contact contact) {
-        Window[] windows = Window.getWindows();
-        if (windows.length > 0) {
-            windows[windows.length - 1].dispose();
-        }
-
-        // Delete the contact and update the view
-        contactModel.deleteContact(contact);
-        contactView.updateContacts(contactModel.getContacts());
+        contactView.updateContacts(contactDAO.getAllContacts());
         contactView.displayContactsWindow();
     }
-    public ArrayList<Contact> getContacts(){
-        return contactModel.getContacts();
+
+    public void redoContact(Contact contact) {
+        contactView.redoContact(contact);
+    }
+
+    public void deleteContact(Contact contact) {
+        contactDAO.deleteContact(contact);
+        contactView.updateContacts(contactDAO.getAllContacts());
     }
 }
