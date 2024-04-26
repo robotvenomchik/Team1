@@ -1,6 +1,8 @@
-package org.example.mvcProject;
+package org.example.mvcProject.Controller;
 
-import java.util.ArrayList;
+import org.example.mvcProject.Model.Contact;
+import org.example.mvcProject.Model.ContactDAO;
+import org.example.mvcProject.Views.ContactView;
 
 public class ContactController {
     private ContactDAO contactDAO;

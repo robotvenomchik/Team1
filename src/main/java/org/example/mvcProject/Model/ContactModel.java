@@ -1,4 +1,4 @@
-package org.example.mvcProject;
+package org.example.mvcProject.Model;
 
 import javax.swing.*;
 import java.io.*;

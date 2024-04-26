@@ -1,5 +1,9 @@
-package org.example.mvcProject;
+package org.example.mvcProject.Test;
 
+import org.example.mvcProject.Controller.ContactController;
+import org.example.mvcProject.Model.Contact;
+import org.example.mvcProject.Model.ContactModel;
+import org.example.mvcProject.Views.ContactView;
 import org.junit.Before;
 import org.junit.Test;
 

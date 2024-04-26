@@ -1,4 +1,7 @@
-package org.example.mvcProject;
+package org.example.mvcProject.Views;
+
+import org.example.mvcProject.Model.Contact;
+import org.example.mvcProject.Controller.ContactController;
 
 import javax.swing.*;
 import java.awt.*;

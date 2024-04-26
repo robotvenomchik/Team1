@@ -1,5 +1,7 @@
 // ContactDAO.java
-package org.example.mvcProject;
+package org.example.mvcProject.Model;
+
+import org.example.mvcProject.Model.Contact;
 
 import java.util.ArrayList;
 
